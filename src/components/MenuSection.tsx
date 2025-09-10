@@ -209,7 +209,7 @@ const MenuItemCard = ({ item, isFavorite, onToggleFavorite }: MenuItemCardProps)
   const [imageError, setImageError] = useState(false);
 
   return (
-    <div className="card-menu-item">
+    <div className="card-menu-item group">
       {/* Image */}
       <div className="relative h-48 mb-4 bg-muted rounded-lg overflow-hidden">
         {!imageError ? (
