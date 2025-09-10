@@ -1,42 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Market Diner Design System - Classic diner vibes with modern touches */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Diner Color Palette */
+    --background: 0 0% 98%;
+    --foreground: 220 13% 18%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 220 13% 18%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 220 13% 18%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Classic Diner Red */
+    --primary: 0 74% 58%;
+    --primary-foreground: 0 0% 98%;
+    --primary-hover: 0 74% 52%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Chrome Silver */
+    --secondary: 220 14% 96%;
+    --secondary-foreground: 220 13% 18%;
+    --chrome: 210 20% 85%;
+    --chrome-dark: 210 20% 75%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Warm Cream */
+    --cream: 45 29% 95%;
+    --cream-foreground: 220 13% 18%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 9% 46%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --accent: 45 29% 95%;
+    --accent-foreground: 220 13% 18%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
 
-    --radius: 0.5rem;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 0 74% 58%;
+
+    --radius: 0.75rem;
+
+    /* Diner Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-hover)));
+    --gradient-chrome: linear-gradient(145deg, hsl(var(--chrome)), hsl(var(--chrome-dark)));
+    --gradient-warm: linear-gradient(180deg, hsl(var(--cream)), hsl(var(--background)));
+
+    /* Shadows */
+    --shadow-card: 0 4px 6px -1px hsl(var(--foreground) / 0.1), 0 2px 4px -1px hsl(var(--foreground) / 0.06);
+    --shadow-elevated: 0 10px 15px -3px hsl(var(--foreground) / 0.1), 0 4px 6px -2px hsl(var(--foreground) / 0.05);
+    --shadow-chrome: 0 2px 8px hsl(var(--chrome-dark) / 0.3);
+
+    /* Typography */
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'Inter', sans-serif;
+
+    /* Transitions */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
     --sidebar-background: 0 0% 98%;
 
@@ -100,6 +128,94 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-body;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading;
+  }
+}
+
+@layer components {
+  /* Diner Button Variants */
+  .btn-hero {
+    @apply bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary text-primary-foreground font-medium px-8 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105;
+  }
+
+  .btn-chrome {
+    @apply bg-gradient-to-b from-chrome to-chrome-dark text-foreground font-medium px-6 py-2.5 rounded-lg shadow-chrome hover:shadow-elevated transition-all duration-300 hover:-translate-y-0.5;
+  }
+
+  .btn-outline-diner {
+    @apply border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground font-medium px-6 py-2.5 rounded-lg transition-all duration-300 hover:scale-105;
+  }
+
+  /* Card Styles */
+  .card-diner {
+    @apply bg-card rounded-xl shadow-card hover:shadow-elevated transition-all duration-300 hover:-translate-y-1 border border-border/50;
+  }
+
+  .card-menu-item {
+    @apply card-diner p-4 group cursor-pointer overflow-hidden;
+  }
+
+  /* Gradients */
+  .gradient-hero {
+    background: var(--gradient-hero);
+  }
+
+  .gradient-chrome {
+    background: var(--gradient-chrome);
+  }
+
+  .gradient-warm {
+    background: var(--gradient-warm);
+  }
+
+  /* Animations */
+  .fade-in-up {
+    @apply opacity-0 translate-y-4;
+    animation: fadeInUp 0.6s ease-out forwards;
+  }
+
+  .hover-lift {
+    @apply transition-transform duration-300 hover:-translate-y-1 hover:shadow-elevated;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@layer utilities {
+  .text-shadow-sm {
+    text-shadow: 0 1px 2px hsl(var(--foreground) / 0.1);
+  }
+
+  .transition-smooth {
+    transition: var(--transition-smooth);
+  }
+
+  .transition-bounce {
+    transition: var(--transition-bounce);
+  }
+}
+
+/* Keyframes */
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
